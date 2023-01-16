@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcService.Server";
+
+package category;
+
+service CategoryService {
+  rpc GetCategories (google.protobuf.Empty) returns (CategoryResponse);
+  rpc GetCategoriesStream (google.protobuf.Empty) returns (stream CategoryResponse);
+}
+
+message CategoryResponse {
+  repeated Category categories = 1;
+}
+
+message Category {
+  int32 id = 1;
+  string name = 2;
+  google.protobuf.StringValue image = 3;
+  google.protobuf.StringValue parentCategoryName = 4;
+  google.protobuf.Int32Value parentCategoryId = 5;
+  google.protobuf.Timestamp timestamp = 6;
+}
